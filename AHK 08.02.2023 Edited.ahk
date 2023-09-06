@@ -4,7 +4,7 @@
 ; AutoHotkey Version: 1.1.30.00
 ; Language:       English
 
-; Authors: Shaun Doden, Joshua Compton, Jan Ames, and Kenny Cole
+; Authors: Shaun Doden, Joshua Compton, Jan Ames, and Kenny Cole, and David Hazelwood!
 ;
 ;
 
