@@ -816,7 +816,7 @@ Return
 :*:n.spell::To ensure your content is accessible, please review and spell out abbreviations or acronyms on the first reference.
 Return
 
-:*:n.timesens::Some or all information on this URL was time sensitive and per CP Best Practices was not migrated. We recommend populating this information during training in its respective module.
+:*:n.timesens::Some or all information on this URL was time sensitive and per CP Best Practices was not migrated. We recommend populating this information after training in its respective module.
 Return
 
 :*:n.pii::We did not migrate fields on your form that require Personally Identifiable Information (PII), which we do not bring over per our best practices in order to protect users' information. Please review to see if this information is necessary, and if so, consider discussing Platinum Security options with your Project Manager.
