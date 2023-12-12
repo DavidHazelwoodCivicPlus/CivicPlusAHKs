@@ -60,7 +60,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ; >Section 7: Redesign Replace List (Moved to its own AHK)
 ; >Section 8: Accessibility Requirements / Replacements
 ; >Section 9: Custom Scripts / Testing
-
+; >Section 10: David Hazelwood Scripts
 
 ; ##########  >Section 1: Hotstrings  ######################################################
 
@@ -722,6 +722,9 @@ Return
 Return
 
 :*:n.epay::
+Return
+
+:*:n.exist::This was not an existing page on your site. It was created to organize content.
 Return
 
 :*:n.fac::We recommend reviewing the information entered into the facilities module for these resources and ensuring that all contact information is updated and/or correct, including phone numbers, emails, and facility features. We also recommend using exact addresses if these are missing from any entries. Any images of facilities that are smaller than 250 by 250 pixels will not display in the facilities list and we recommend uploading larger images.
@@ -2010,8 +2013,8 @@ segment := RegExReplace(segment, "(12) (noon|Noon)","$2") ; replaces redundant "
 segment := RegExReplace(segment, "12\ a\.?m\.?\b","midnight")
 segment := RegExReplace(segment, "([0-9])\ ?(A\.?|a\.?)(M\.?|m\.?)","$1 am")
 segment := RegExReplace(segment, "([0-9])\ ?(P\.?|p\.?)(M\.?|m\.?)","$1 pm")
-segment := RegExReplace(segment, "([0-9]) (\bam\b|\bpm\b)(<\/p>)", "$1 $2.</p>") ; adds back period after "am" "pm" at end of sentence
-segment := RegExReplace(segment, "([0-9]) (\bam\b|\bpm\b) ([A-Y])", "$1 $2. $3") ; adds back period after "am" "pm" at end of sentence
+; segment := RegExReplace(segment, "([0-9]) (\bam\b|\bpm\b)(<\/p>)", "$1 $2.</p>") ; adds back period after "am" "pm" at end of sentence. Update 12/11/23 I got rid of this because it was adding a period when it shouldn't of. - DH
+; segment := RegExReplace(segment, "([0-9]) (\bam\b|\bpm\b) ([A-Y])", "$1 $2. $3") ; adds back period after "am" "pm" at end of sentence. Update 12/11/23 I got rid of this because it was adding a period when it shouldn't of. - DH
 ; segment := RegExReplace(segment, "([0-9]) (\bam\b|\bpm\b)", "$1 <abbr>$2</abbr>") ; New, adds <abbr> tags to "am" and "pm" 3/12/2020
 ; segment := RegExReplace(segment, "(\d{3,4}) (<abbr>am<\/abbr>)","$1 AM") ; New, Fixes <abbr>am</abbr> radio frequencies
 segment := RegExReplace(segment, "(>am|>AM|>pm)(<\/abbr>)\s?(<\/p>)"," $1$2.$3") ; adds periods at end of section
@@ -2294,6 +2297,9 @@ Return
 
 ; (?s)<td(\ style\=\"width\:\ ?\d*\.\d*\%\;\")?>(?:\r*\n*\t*)\ ?(?:&nbsp\;)*?(?:\r*\n*\t*)?(?:<br>)*?(?:\r*\n*\t*)(?:<br>)*?<\/td>
 
+; ##########  >Section 10: David Hazelwood Scripts  ##########################################
+
+; These scripts auto assign images to be right aligned, in text, and have a width of 10, 20, 30, 40, or 50 percent based on the input of 1 through 5
 
 ; Define the hotkey Cntrl Alt 1
 ^!1::
@@ -2400,3 +2406,40 @@ return
     SendInput, ^v
   }
 return
+
+; Add HTML bold tags to text that is in all caps.
+^!b::
+    ClipboardBackup := ClipboardAll
+    Send, ^c
+    ClipWait, 1
+    segment := Clipboard
+    segment := RegExReplace(segment, "(?<!<b>)\b([A-Z]+)\b(?!<\/b>)", "<b>" ("$1") "</b>")
+
+    segment := RegExReplace(segment, "<b>I</b>", "I")
+    segment := RegExReplace(segment, "<b>A</b>", "A")
+
+
+    Clipboard := segment
+    Send, ^v
+    Clipboard := ClipboardBackup
+return
+
+; Writes the words " Facebook Page"
+^!f::
+    SendInput {Space}Facebook Page
+Return
+
+; Writes the words " Twitter Page"
+^!t::
+    SendInput  {Space}Twitter Page
+Return
+
+; Writes the words " Website"
+^!w::
+    SendInput  {Space}Website
+Return
+
+; Writes the words " Page"
+^!p::
+    SendInput  {Space}Page
+Return
