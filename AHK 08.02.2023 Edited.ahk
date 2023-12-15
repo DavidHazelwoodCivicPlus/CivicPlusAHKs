@@ -2407,39 +2407,23 @@ return
   }
 return
 
-; Add HTML bold tags to text that is in all caps.
-^!b::
-    ClipboardBackup := ClipboardAll
-    Send, ^c
-    ClipWait, 1
-    segment := Clipboard
-    segment := RegExReplace(segment, "(?<!<b>)\b([A-Z]+)\b(?!<\/b>)", "<b>" ("$1") "</b>")
-
-    segment := RegExReplace(segment, "<b>I</b>", "I")
-    segment := RegExReplace(segment, "<b>A</b>", "A")
-
-
-    Clipboard := segment
-    Send, ^v
-    Clipboard := ClipboardBackup
-return
-
+; For these use CTRL ALT and the letters F, T, S, or P
 ; Writes the words " Facebook Page"
 ^!f::
     SendInput {Space}Facebook Page
-Return
+return
 
 ; Writes the words " Twitter Page"
 ^!t::
     SendInput  {Space}Twitter Page
-Return
+return
 
 ; Writes the words " Website"
-^!w::
+^!s::
     SendInput  {Space}Website
-Return
+return
 
 ; Writes the words " Page"
 ^!p::
     SendInput  {Space}Page
-Return
+return
